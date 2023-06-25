@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Yatra</string>
+    <string name="welcometxt">Welcome Back</string>
+    <string name="signintxt">Sign In to continue</string>
+    <string name="signuptxt">Sign Up to continue</string>
+    <string name="logintxt">Login</string>
+    <string name="registertxt">Register</string>
+    <string name="nametxt">Full Name</string>
+    <string name="emailtxt">Email</string>
+    <string name="conpasstxt">Confirm Password</string>
+    <string name="passwordtxt">Password</string>
+    <string name="entername">Enter your name</string>
+    <string name="enteremail">Enter your email</string>
+    <string name="enterpassword">Enter your password</string>
+    <string name="forgetpasswordtxt">Forget Password?</string>
+    <string name="donthaveaccounttxt">Don\'t have an account? Sign Up</string>
+    <string name="alreadyhaveaccounttxt">Already have an account?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

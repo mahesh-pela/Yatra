@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="Explore"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_background"
+            android:layout_margin="25dp"
+            android:hint="Search here"
+            android:paddingLeft="10dp"/>
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:background="@drawable/search_icon"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="30dp"/>
+
+        
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Destinations"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"/>
+
+</LinearLayout>
