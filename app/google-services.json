@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "364227115209",
-    "project_id": "yatra-8dbcf",
-    "storage_bucket": "yatra-8dbcf.appspot.com"
+    "project_number": "144271728630",
+    "firebase_url": "https://yatra-389301-default-rtdb.firebaseio.com",
+    "project_id": "yatra-389301",
+    "storage_bucket": "yatra-389301.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:364227115209:android:d7f60199f323d4f7ddf518",
+        "mobilesdk_app_id": "1:144271728630:android:8ff627f2d8d82ef54d71d7",
         "android_client_info": {
           "package_name": "com.example.yatra"
         }
       },
       "oauth_client": [
         {
-          "client_id": "364227115209-uk1nk9834ri0vl0uinmhtnlppht4adcc.apps.googleusercontent.com",
+          "client_id": "144271728630-443rmmn5ucngvmc51esgb50vjk5rv10j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAJ7eMmEvVMjO6JgiAQ6pP-c_XWKp7EJ9c"
+          "current_key": "AIzaSyD4PUl0jGthgOdcayMKrO8ztF4GJlX9jpU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "364227115209-uk1nk9834ri0vl0uinmhtnlppht4adcc.apps.googleusercontent.com",
+              "client_id": "144271728630-443rmmn5ucngvmc51esgb50vjk5rv10j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
