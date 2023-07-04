@@ -103,29 +103,4 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-
-//        btnRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                database = FirebaseDatabase.getInstance();
-//                reference = database.getReference("users");
-////
-//                HelperClass helperClass =new HelperClass(fullname, email, password, conpassword);
-//                reference.child("fullname").setValue(helperClass);
-//                Toast.makeText(getApplicationContext(),"Successfully Registered",Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        haveAccounttxt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
-
-//    }
     }}

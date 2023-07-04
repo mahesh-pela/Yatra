@@ -3,7 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="@drawable/home_bg">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,6 +16,7 @@
         android:layout_marginLeft="30dp"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:text="Explore"/>
 
     <RelativeLayout
@@ -21,28 +27,51 @@
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/edit_background"
-            android:layout_margin="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/search_background"
+            android:drawablePadding="20dp"
             android:hint="Search here"
-            android:paddingLeft="10dp"/>
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:background="@drawable/search_icon"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="35dp"
-            android:layout_marginRight="30dp"/>
+            android:paddingLeft="10dp"
+            android:drawableLeft="@drawable/baseline_search_24"/>
 
         
     </RelativeLayout>
+</LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Top Destinations"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginLeft="30dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View All"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/top_destinations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
 
 <!--    bottom navbar-->
     <LinearLayout
@@ -117,13 +146,13 @@
                 android:id="@+id/imgArticles"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/article_icn"/>
+                android:background="@drawable/booking_icn"/>
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Articles"
+                android:text="Bookings"
                 android:textSize="15sp"/>
         </LinearLayout>
 

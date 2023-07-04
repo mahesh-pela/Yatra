@@ -3,13 +3,11 @@ package com.example.yatra;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,45 +18,50 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
-
 public class ProfileActivity extends AppCompatActivity {
-    FirebaseDatabase database;
-    FirebaseAuth mAuth;
-    DatabaseReference databaseReference;
+    private static final String TAG = "ProfileActivity";
+    private FirebaseDatabase database;
+    private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
 
-    private TextView name, email;
+    private TextView txtName, txtEmail;
     private Button btnLogout;
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
+        txtName = findViewById(R.id.txtName);
+        txtEmail = findViewById(R.id.txtEmail);
         btnLogout = findViewById(R.id.btnLogout);
 
-//        database = FirebaseDatabase.getInstance();
-//
-//        database.getReference().child("users").child("Info").child(Objects.requireNonNull(mAuth.getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                HelperClass helperClass = snapshot.getValue(HelperClass.class);
-//                name.setText(helperClass.getFullname());
-//                email.setText(helperClass.getEmail());
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference().child("users").child("Info").child(mAuth.getUid());
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    HelperClass helperClass = dataSnapshot.getValue(HelperClass.class);
+                    if (helperClass != null) {
+                        txtName.setText("Full Name: " + helperClass.getFullname());
+                        txtEmail.setText("Email: " + helperClass.getEmail());
+
+
+                    }
+                } else {
+                    Log.d(TAG, "Data snapshot does not exist");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "Error retrieving data from Firebase: " + databaseError.getMessage());
+            }
+        });
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +73,4 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
