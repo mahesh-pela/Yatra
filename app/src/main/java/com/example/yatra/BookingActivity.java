@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.yatra.R;
@@ -17,6 +20,10 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class BookingActivity extends AppCompatActivity {
+    ImageView backArrow;
+    EditText roomCount_edtText;
+    Button btnIncrement, btnDecrement;
+    int roomCount =1;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -24,69 +31,40 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
+        backArrow = findViewById(R.id.backArrow);
+        roomCount_edtText = findViewById(R.id.roomCount_edtText);
+        btnIncrement = findViewById(R.id.btnIncrement);
+        btnDecrement = findViewById(R.id.btnDecrement);
+
+        //set initial room count in the edit Text
+        roomCount_edtText.setText(String.valueOf(roomCount));
+        btnIncrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                roomCount++;
+                roomCount_edtText.setText(String.valueOf(roomCount));
+            }
+        });
+
+        btnDecrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //checks that room count does not become negative
+                if(roomCount > 1){
+                    roomCount--;
+                    roomCount_edtText.setText(String.valueOf(roomCount));
+                }
+            }
+        });
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BookingActivity.this, HotelsActivity.class));
+            }
+        });
+
+
         //DatePicker
-        EditText checkInDateEditText = findViewById(R.id.check_in_date_edit_text);
-        EditText checkOutDateEditText = findViewById(R.id.check_out_date_edit_text);
-
-        checkInDateEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDatePickerDialog(checkInDateEditText);
-            }
-
-            private void showDatePickerDialog(EditText checkInDateEditText) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-
-                // Create the DatePickerDialog
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getApplicationContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                // Update the EditText with the selected date
-                                String selectedDate = String.format(Locale.getDefault(), "%02d/%02d/%04d",
-                                        dayOfMonth, monthOfYear + 1, year);
-                                checkInDateEditText.setText(selectedDate);
-                            }
-                        }, year, month, dayOfMonth);
-
-                // Show the DatePickerDialog
-                datePickerDialog.show();
-            }
-        });
-
-        checkOutDateEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDatePickerDialog(checkOutDateEditText);
-            }
-
-            private void showDatePickerDialog(EditText checkOutDateEditText) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-
-                // Create the DatePickerDialog
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getApplicationContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                // Update the EditText with the selected date
-                                String selectedDate = String.format(Locale.getDefault(), "%02d/%02d/%04d",
-                                        dayOfMonth, monthOfYear + 1, year);
-                                checkOutDateEditText.setText(selectedDate);
-                            }
-                        }, year, month, dayOfMonth);
-
-                // Show the DatePickerDialog
-                datePickerDialog.show();
-
-            }
-        });
-
 
         //Drop Down Room Types
         Spinner roomTypeSpinner = findViewById(R.id.room_type_spinner);

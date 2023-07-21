@@ -32,7 +32,6 @@ public class HotelsActivity extends AppCompatActivity {
     FirebaseFirestore db;
     RecyclerView hotel_rec;
     ImageView backArrow;
-//    Button bookbtn;
 
     List<PopularModel> popularModelList;
     AllHotelsAdapter allHotelsAdapter;
@@ -46,7 +45,6 @@ public class HotelsActivity extends AppCompatActivity {
         hotel_rec = findViewById(R.id.hotel_rec);
         backArrow = findViewById(R.id.backArrow);
 
-//        bookbtn = findViewById(R.id.bookbtn);
 
         //initialize database
         db = FirebaseFirestore.getInstance();
@@ -82,14 +80,6 @@ public class HotelsActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-//        bookbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(HotelsActivity.this, BookingActivity.class));
-//                finish();
-//            }
-//        });
 
 
         db.collection("PopularHotels").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

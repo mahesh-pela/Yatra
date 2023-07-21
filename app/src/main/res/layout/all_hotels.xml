@@ -67,14 +67,6 @@
                 android:text="Description"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="15sp"/>
-
-            <Button
-                android:id="@+id/bookbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Book Now"
-                android:textSize="15sp"
-                android:layout_gravity="center"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
