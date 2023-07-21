@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Places"
+    tools:context=".HotelsActivity"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,19 +22,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Explore Destinations"
+            android:text="Explore Hotels"
             android:textSize="20sp"
             android:fontFamily="sans-serif-condensed-medium"
             android:layout_marginLeft="60dp"
             android:textStyle="bold"/>
     </androidx.appcompat.widget.Toolbar>
 
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/place_rec"
+        android:id="@+id/hotel_rec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

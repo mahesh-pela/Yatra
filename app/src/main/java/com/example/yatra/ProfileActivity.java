@@ -3,11 +3,13 @@ package com.example.yatra;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +29,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView txtName, txtEmail;
     private Button btnLogout;
+    ImageView backArrow;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         txtName = findViewById(R.id.txtName);
         txtEmail = findViewById(R.id.txtEmail);
         btnLogout = findViewById(R.id.btnLogout);
+        backArrow = findViewById(R.id.backArrow);
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -49,8 +54,6 @@ public class ProfileActivity extends AppCompatActivity {
                     if (helperClass != null) {
                         txtName.setText("Full Name: " + helperClass.getFullname());
                         txtEmail.setText("Email: " + helperClass.getEmail());
-
-
                     }
                 } else {
                     Log.d(TAG, "Data snapshot does not exist");
@@ -60,6 +63,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "Error retrieving data from Firebase: " + databaseError.getMessage());
+            }
+        });
+
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, DashboardActivity.class));
             }
         });
 

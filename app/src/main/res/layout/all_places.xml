@@ -1,35 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     app:cardCornerRadius="15dp">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/backArrow"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/baseline_arrow_back_24"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tourist Destinations"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-black"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="35dp"/>
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,11 +17,11 @@
         android:orientation="vertical"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="15dp">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/top_img"
-            android:layout_width="360dp"
+            android:layout_width="300dp"
             android:layout_height="180dp"
             app:riv_corner_radius="15dp"
             android:scaleType="centerCrop"
@@ -52,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Top Destination"
+            android:textStyle="bold"
             android:textSize="15sp"
             android:fontFamily="sans-serif-medium"/>
         <TextView
@@ -63,6 +44,6 @@
             android:fontFamily="sans-serif-medium"
             android:ellipsize="end"/>
     </LinearLayout>
-
-
 </androidx.cardview.widget.CardView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

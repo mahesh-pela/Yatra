@@ -15,6 +15,7 @@ import com.example.yatra.Model.PopularModel;
 import com.example.yatra.Model.TopDestinationModel;
 import com.example.yatra.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
