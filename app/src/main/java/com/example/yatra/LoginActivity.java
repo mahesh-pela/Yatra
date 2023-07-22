@@ -1,5 +1,6 @@
 package com.example.yatra;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private AppCompatButton btnLogin;
 
     private FirebaseAuth mAuth;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 //        txtForgetPassword =findViewById(R.id.txtForgetPassword);
         btnLogin =findViewById(R.id.btnLogin);
 
+
         mAuth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -45,11 +48,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email= edtEmail.getText().toString();
                 String password = edtPassword.getText().toString();
+
+                //progressDialog section
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Login in progress");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
                 if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     if(!password.isEmpty()){
                         mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+                                progressDialog.dismiss();
                                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                                 finish();
@@ -57,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
                                 Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                             }
                         });
