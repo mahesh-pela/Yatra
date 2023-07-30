@@ -25,13 +25,10 @@ import java.util.List;
 public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.ViewHolder> {
     private Context context;
     private List<PopularModel> popularModelList;
-//    Button bookbtn;
-//    private List<PopularModel> filteredList;
 
     public AllHotelsAdapter(Context context, List<PopularModel> popularModelList) {
         this.context = context;
         this.popularModelList = popularModelList;
-//        this.filteredList = new ArrayList<>(popularModelList);
     }
 
 
@@ -43,20 +40,9 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                bookbtn.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Intent intent = new Intent(context, BookingActivity.class);
-//                        context.startActivity(intent);
-//                    }
-//                });
-            }
-        });
         Glide.with(context).load(popularModelList.get(position).getImg_url()).into(holder.pop_img);
         holder.hotel_name.setText(popularModelList.get(position).getName());
+        holder.location.setText(popularModelList.get(position).getLocation());
         holder.price.setText(popularModelList.get(position).getPrice());
         holder.discount.setText(popularModelList.get(position).getDiscount());
         holder.pop_description.setText(popularModelList.get(position).getDescription());
@@ -69,55 +55,20 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView pop_img;
-        TextView hotel_name, price, discount, pop_description;
+        TextView hotel_name, price, discount, pop_description, location;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             pop_img = itemView.findViewById(R.id.pop_img);
             hotel_name = itemView.findViewById(R.id.hotel_name);
+            location = itemView.findViewById(R.id.location);
             price =itemView.findViewById(R.id.price);
             discount =itemView.findViewById(R.id.discount);
             pop_description =itemView.findViewById(R.id.pop_description);
-//            bookbtn = itemView.findViewById(R.id.bookbtn);
 
         }
     }
-
-
-
-//    public Filter getFilter() {
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence constraint) {
-//                String filterPattern = constraint.toString().toLowerCase().trim();
-//
-//                if (filterPattern.isEmpty()) {
-//                    filteredList.clear();
-//                    filteredList.addAll(popularModelList);
-//                } else {
-//                    List<PopularModel> tempList = new ArrayList<>();
-//                    for (PopularModel hotel : popularModelList) {
-//                        if (hotel.getName().toLowerCase().contains(filterPattern)) {
-//                            tempList.add(hotel);
-//                        }
-//                    }
-//                    filteredList.clear();
-//                    filteredList.addAll(tempList);
-//                }
-//
-//                FilterResults results = new FilterResults();
-//                results.values = filteredList;
-//                return results;
-//            }
-//
-//            @Override
-//            protected void publishResults(CharSequence constraint, FilterResults results) {
-//                filteredList = (List<PopularModel>) results.values;
-//                notifyDataSetChanged();
-//            }
-//        };
-//    }
 
 
 }

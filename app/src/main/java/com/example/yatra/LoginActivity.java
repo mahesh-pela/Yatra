@@ -83,6 +83,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //checks if the user is already login or not
+//        if (mAuth.getCurrentUser()!=null){
+//            Intent intent= new Intent(LoginActivity.this,DashboardActivity.class);
+//            startActivity(intent);
+//        }
+
         txtSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

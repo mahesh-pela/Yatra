@@ -62,6 +62,8 @@ public class HotelsActivity extends AppCompatActivity {
                 PopularModel hotel = popularModelList.get(position);
                 Intent intent = new Intent(HotelsActivity.this, BookingActivity.class);
                 intent.putExtra("hotel_name", hotel.getName()); // Assuming you have a unique ID for each hotel
+                intent.putExtra("price", hotel.getPrice());
+                intent.putExtra("location", hotel.getLocation());
                 startActivity(intent);
             }
 
@@ -94,8 +96,8 @@ public class HotelsActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
+
     private interface ClickListener {
         void onClick(View view, int position);
 

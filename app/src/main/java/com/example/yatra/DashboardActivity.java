@@ -37,10 +37,8 @@ public class DashboardActivity extends AppCompatActivity{
     List<TopDestinationModel> topDestinationModelList;
     List<PopularModel> popularModelList;
     TopDestAdapter topDestAdapter;
-//    AllHotelsAdapter allHotelsAdapter;
-//    AllPlacesAdapter allPlacesAdapter;
     PopularAdapter popularAdapter;
-    ImageView imgProfile, imgPlaces, imgHotels;
+    ImageView imgProfile, imgPlaces, imgHotels, imgBookings;
     TextView viewAll_dest, viewAll_hotels;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -55,14 +53,7 @@ public class DashboardActivity extends AppCompatActivity{
         pop_hotels = findViewById(R.id.pop_hotels);
         imgPlaces = findViewById(R.id.imgPlaces);
         imgHotels = findViewById(R.id.imgHotels);
-
-//
-//        RecyclerView topDestinationsRecycler = findViewById(R.id.top_destinations);
-//        RecyclerView popHotelsRecycler = findViewById(R.id.pop_hotels);
-
-        // Initialize SearchView
-//        SearchView searchView = findViewById(R.id.searchView);
-//        searchView.setOnQueryTextListener(this);
+        imgBookings = findViewById(R.id.imgBookings);
 
         //initializing FirebaseFireStore
         db = FirebaseFirestore.getInstance();
@@ -76,17 +67,6 @@ public class DashboardActivity extends AppCompatActivity{
         popularModelList = new ArrayList<>();
         popularAdapter = new PopularAdapter(getApplicationContext(), popularModelList);
         pop_hotels.setAdapter(popularAdapter);
-
-
-        //check whether the user is logged in
-        SessionManager sessionManager = new SessionManager();
-        if (sessionManager.isLoggedIn()) {
-            // User is logged in, proceed with app functionality
-        } else {
-            // User is not logged in, redirect to login activity
-            startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-            finish();
-        }
 
 
         db.collection("TopDestination")
@@ -167,5 +147,12 @@ public class DashboardActivity extends AppCompatActivity{
             }
         });
 
+        imgBookings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, BookingDetails.class));
+                finish();
+            }
+        });
     }
 }

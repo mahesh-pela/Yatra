@@ -24,7 +24,7 @@
             android:id="@+id/hotel_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top Destination"
+            android:text="Top Hotel"
             android:textStyle="bold"
             android:textSize="15sp"
             android:fontFamily="sans-serif-medium"/>

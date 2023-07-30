@@ -29,16 +29,13 @@ import java.util.Map;
 
 public class BookingActivity extends AppCompatActivity {
     ImageView backArrow;
-    EditText roomCount_edtText;
+    EditText roomCount_edtText, checkInDateEditText, checkOutDateEditText ;
     Button btnIncrement, btnDecrement, book_button;
     int roomCount = 1;
 
     ProgressDialog progressDialog;
-    EditText checkInDateEditText;
     Spinner room_type_spinner;
-    EditText checkOutDateEditText;
-    Calendar checkInCalendar;
-    Calendar checkOutCalendar;
+    Calendar checkInCalendar, checkOutCalendar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -114,6 +111,8 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String hotelName = getIntent().getStringExtra("hotel_name");
+                String roomPrice = getIntent().getStringExtra("price");
+                String hotelLocation = getIntent().getStringExtra("location");
                 String checkInDate = checkInDateEditText.getText().toString();
                 String roomType = room_type_spinner.getSelectedItem().toString();
                 String checkOutDate = checkOutDateEditText.getText().toString();
@@ -123,7 +122,11 @@ public class BookingActivity extends AppCompatActivity {
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 
-                storeBookingDataToFirestore(hotelName, checkInDate, roomType, checkOutDate, roomCount);
+                int totalRoomPrice = Integer.parseInt(roomPrice);
+                int totalPrice = totalRoomPrice * roomCount;
+
+
+                storeBookingDataToFirestore(hotelName, roomPrice, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice);
             }
         });
     }
@@ -156,13 +159,17 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     //sending booking details to the firebase
-    private void storeBookingDataToFirestore(String hotelName, String checkInDate, String roomType, String checkOutDate, int roomCount) {
+    private void storeBookingDataToFirestore(String hotelName, String roomPrice, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice) {
         // Get the Firebase Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
         // Create a new document with a random ID and set the booking data
         Map<String, Object> bookingData = new HashMap<>();
         bookingData.put("hotel_name", hotelName);
+        bookingData.put("room_price", roomPrice);
+        bookingData.put("total_price", totalPrice);
+        bookingData.put("location", hotelLocation);
         bookingData.put("check_in_date", checkInDate);
         bookingData.put("room_type", roomType);
         bookingData.put("check_out_date", checkOutDate);

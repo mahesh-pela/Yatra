@@ -3,6 +3,7 @@ package com.example.yatra.Model;
 public class PopularModel {
 
     String name;
+    String location;
     String description;
     String discount;
     String price;
@@ -11,14 +12,22 @@ public class PopularModel {
     public PopularModel() {
     }
 
-    public PopularModel(String name, String description, String discount, String price, String img_url) {
+    public PopularModel(String name, String location, String description, String discount, String price, String img_url) {
         this.name = name;
         this.description = description;
         this.discount = discount;
         this.price = price;
         this.img_url = img_url;
+        this.location = location;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
     public String getName() {
         return name;
     }
