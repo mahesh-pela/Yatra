@@ -1,5 +1,6 @@
 package com.example.yatra.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
     private Context context;
     private List<PopularModel> popularModelList;
 
+
     public AllHotelsAdapter(Context context, List<PopularModel> popularModelList) {
         this.context = context;
         this.popularModelList = popularModelList;
@@ -48,10 +50,6 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
         holder.pop_description.setText(popularModelList.get(position).getDescription());
     }
 
-    @Override
-    public int getItemCount() {
-        return popularModelList.size();
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView pop_img;
@@ -69,6 +67,13 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
 
         }
     }
+
+    @Override
+    public int getItemCount() {
+        return popularModelList.size();
+    }
+
+
 
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.yatra.Model.BookingModel;
@@ -45,6 +46,7 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
         TextView textViewCheckInDate = convertView.findViewById(R.id.textViewCheckInDate);
         TextView textViewCheckOutDate = convertView.findViewById(R.id.textViewCheckOutDate);
         TextView textViewRoomCount = convertView.findViewById(R.id.textViewRoomCount);
+//        RatingBar ratingBar = convertView.findViewById(R.id.ratingBar);
 
         textViewRoomType.setText("Room Type: " + bookingModel.getRoom_type());
         textViewHotelLocation.setText("Location: " + bookingModel.getLocation());
@@ -54,6 +56,7 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
         textViewCheckOutDate.setText("Check-out Date: " + bookingModel.getCheck_out_date());
         textViewRoomCount.setText("Room Count: " + bookingModel.getRoom_count());
         textViewHotelName.setText("Hotel Name: " + bookingModel.getHotel_name());
+//        ratingBar.setRating(Float.parseFloat("Rating: " + bookingModel.getRating()));
 
         return convertView;
     }

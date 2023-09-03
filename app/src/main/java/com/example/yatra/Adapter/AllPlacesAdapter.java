@@ -22,12 +22,10 @@ import java.util.List;
 public class AllPlacesAdapter extends RecyclerView.Adapter<AllPlacesAdapter.ViewHolder> {
     private Context context;
     private List<TopDestinationModel> topDestinationModelList;
-//    private List<TopDestinationModel> filteredList;
 
     public AllPlacesAdapter(Context context, List<TopDestinationModel> topDestinationModelList) {
         this.context = context;
         this.topDestinationModelList = topDestinationModelList;
-//        this.filteredList = new ArrayList<>(topDestinationModelList);
     }
 
 
@@ -64,36 +62,4 @@ public class AllPlacesAdapter extends RecyclerView.Adapter<AllPlacesAdapter.View
         }
     }
 
-//    public Filter getFilter() {
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence constraint) {
-//                String filterPattern = constraint.toString().toLowerCase().trim();
-//
-//                if (filterPattern.isEmpty()) {
-//                    filteredList.clear();
-//                    filteredList.addAll(topDestinationModelList);
-//                } else {
-//                    List<TopDestinationModel> tempList = new ArrayList<>();
-//                    for (TopDestinationModel place : topDestinationModelList) {
-//                        if (place.getName().toLowerCase().contains(filterPattern)) {
-//                            tempList.add(place);
-//                        }
-//                    }
-//                    filteredList.clear();
-//                    filteredList.addAll(tempList);
-//                }
-//
-//                FilterResults results = new FilterResults();
-//                results.values = filteredList;
-//                return results;
-//            }
-//
-//            @Override
-//            protected void publishResults(CharSequence constraint, FilterResults results) {
-//                filteredList = (List<TopDestinationModel>) results.values;
-//                notifyDataSetChanged();
-//            }
-//        };
-//}
 }

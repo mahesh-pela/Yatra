@@ -1,5 +1,6 @@
 package com.example.yatra.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,13 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     @Override
     public int getItemCount() {
         return popularModelList.size();
+    }
+
+    //this method is called when the search query changes
+    @SuppressLint("NotifyDataSetChanged")
+    public void setFilteredList(List<PopularModel> filteredList){
+        this.popularModelList = filteredList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

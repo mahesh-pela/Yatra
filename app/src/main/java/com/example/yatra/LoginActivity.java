@@ -3,6 +3,7 @@ package com.example.yatra;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -17,12 +18,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword;
     private TextView txtSignup, txtForgetPassword;
     private AppCompatButton btnLogin;
 
+//    private boolean isSignUp= false;
     private FirebaseAuth mAuth;
     ProgressDialog progressDialog;
     @Override
@@ -37,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         edtEmail =findViewById(R.id.edtEmail);
         edtPassword =findViewById(R.id.edtPassword);
         txtSignup =findViewById(R.id.txtSignup);
-//        txtForgetPassword =findViewById(R.id.txtForgetPassword);
         btnLogin =findViewById(R.id.btnLogin);
 
 
@@ -83,11 +85,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //checks if the user is already login or not
-//        if (mAuth.getCurrentUser()!=null){
-//            Intent intent= new Intent(LoginActivity.this,DashboardActivity.class);
-//            startActivity(intent);
-//        }
+//        checks if the user is already login or not
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser !=null){
+            Intent intent= new Intent(LoginActivity.this,DashboardActivity.class);
+            startActivity(intent);
+        }
+
 
         txtSignup.setOnClickListener(new View.OnClickListener() {
             @Override

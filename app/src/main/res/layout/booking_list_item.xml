@@ -21,14 +21,6 @@
         android:textSize="16sp"
         android:text="Location" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/textViewHotelPrice"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="2dp"-->
-<!--        android:textSize="16sp"-->
-<!--        android:text="Price" />-->
-
     <TextView
         android:id="@+id/textViewTotalPrice"
         android:layout_width="wrap_content"
@@ -68,5 +60,15 @@
         android:layout_marginTop="2dp"
         android:text="Room Count"
         android:textSize="16sp" />
+
+    <RatingBar
+        android:id="@+id/rating_Bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:rating="3"
+        android:layout_gravity="center"
+        android:progressTint="@color/yellow" />
 
 </LinearLayout>

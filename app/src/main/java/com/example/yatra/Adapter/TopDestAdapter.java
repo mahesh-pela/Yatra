@@ -1,5 +1,6 @@
 package com.example.yatra.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.yatra.Model.PopularModel;
 import com.example.yatra.Model.TopDestinationModel;
 import com.example.yatra.R;
 
@@ -43,6 +45,13 @@ public class TopDestAdapter extends RecyclerView.Adapter<TopDestAdapter.ViewHold
     @Override
     public int getItemCount() {
         return topDestinationModelList.size();
+    }
+
+    //this method is called when the search query changes
+    @SuppressLint("NotifyDataSetChanged")
+    public void setFilteredList(List<TopDestinationModel> filteredList){
+        this.topDestinationModelList = filteredList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

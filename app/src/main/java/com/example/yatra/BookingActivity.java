@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -33,6 +35,7 @@ public class BookingActivity extends AppCompatActivity {
     Button btnIncrement, btnDecrement, book_button;
     int roomCount = 1;
 
+    FirebaseAuth mAuth;
     ProgressDialog progressDialog;
     Spinner room_type_spinner;
     Calendar checkInCalendar, checkOutCalendar;
@@ -50,6 +53,7 @@ public class BookingActivity extends AppCompatActivity {
         btnIncrement = findViewById(R.id.btnIncrement);
         btnDecrement = findViewById(R.id.btnDecrement);
 
+        mAuth = FirebaseAuth.getInstance();
         checkInDateEditText = findViewById(R.id.check_in_date_edit_text);
         checkOutDateEditText = findViewById(R.id.check_out_date_edit_text);
         checkInCalendar = Calendar.getInstance();
@@ -106,16 +110,26 @@ public class BookingActivity extends AppCompatActivity {
         roomTypeAdapter.add("Suite");
         roomTypeSpinner.setAdapter(roomTypeAdapter);
 
+
         // Handle book_button click
         book_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String currentUserId = mAuth.getUid();
+//                String bookingId = getIntent().getStringExtra("booking_id");
+                String rating = "";
                 String hotelName = getIntent().getStringExtra("hotel_name");
                 String roomPrice = getIntent().getStringExtra("price");
                 String hotelLocation = getIntent().getStringExtra("location");
                 String checkInDate = checkInDateEditText.getText().toString();
                 String roomType = room_type_spinner.getSelectedItem().toString();
                 String checkOutDate = checkOutDateEditText.getText().toString();
+
+                // Check if any of the fields are empty
+                if (checkInDate.isEmpty() || checkOutDate.isEmpty()) {
+                    Toast.makeText(BookingActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 progressDialog = new ProgressDialog(BookingActivity.this);
                 progressDialog.setMessage("Booking in progress..");
@@ -126,7 +140,7 @@ public class BookingActivity extends AppCompatActivity {
                 int totalPrice = totalRoomPrice * roomCount;
 
 
-                storeBookingDataToFirestore(hotelName, roomPrice, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice);
+                storeBookingDataToFirestore(currentUserId, rating, hotelName, roomPrice, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice);
             }
         });
     }
@@ -159,13 +173,16 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     //sending booking details to the firebase
-    private void storeBookingDataToFirestore(String hotelName, String roomPrice, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice) {
+    private void storeBookingDataToFirestore(String currentUserId, String rating, String hotelName, String roomPrice, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice) {
         // Get the Firebase Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         // Create a new document with a random ID and set the booking data
         Map<String, Object> bookingData = new HashMap<>();
+        bookingData.put("UserId", currentUserId);
+//        bookingData.put("booking_id", bookingId);
+        bookingData.put("rating", rating);
         bookingData.put("hotel_name", hotelName);
         bookingData.put("room_price", roomPrice);
         bookingData.put("total_price", totalPrice);
@@ -185,6 +202,13 @@ public class BookingActivity extends AppCompatActivity {
                         // Handle the success case if needed (e.g., show a success message)
                         Toast.makeText(BookingActivity.this, "Booking Successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(BookingActivity.this, DashboardActivity.class));
+
+                        //startBookingDetailsActivity with the booking_id as an extra
+                        String bookingId = documentReference.getId();
+                        Intent intent = new Intent(BookingActivity.this, BookingDetails.class);
+                        intent.putExtra("booking_id", bookingId);
+                        startActivity(intent);
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
