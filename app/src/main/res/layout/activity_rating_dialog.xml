@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#FFC107"/>
+
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-75dp"
+                android:background="@drawable/round_back_while_stroke_1000"
+                android:padding="20dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_back_white_1000"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:padding="25dp"
+                    android:src="@drawable/emojii"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate Us"
+                android:textColor="#CC000000"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"
+                android:text="@string/rateUs"/>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:rating="3"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+                
+                <Button
+                    android:id="@+id/btnRateNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Rate Now"
+                    android:layout_marginStart="20dp"
+                    android:paddingStart="10dp"/>
+
+                <Button
+                    android:id="@+id/btnRateLater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:text="Later"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txtRatingData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="rating"
+                android:textSize="15sp"/>
+                
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

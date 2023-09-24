@@ -2,11 +2,13 @@ package com.example.yatra;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,12 +33,12 @@ import java.util.List;
 import java.util.Map;
 
 public class BookingDetails extends AppCompatActivity {
-
+//    TextView txtRateUs;
     ListView bookingListView;
     BookingListAdapter bookingListAdapter;
     ImageView backArrow;
+
     FirebaseAuth mAuth;
-    RatingBar rating_Bar;
     FirebaseFirestore db;
 
     @SuppressLint("MissingInflatedId")
@@ -45,51 +47,18 @@ public class BookingDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_details);
 
-        rating_Bar = findViewById(R.id.rating_Bar);
         bookingListView = findViewById(R.id.bookingListView);
         backArrow = findViewById(R.id.backArrow);
+//        txtRateUs = findViewById(R.id.txtRateUs);
 
         List<BookingModel> bookingModelList = new ArrayList<>();
         bookingListAdapter = new BookingListAdapter(this, bookingModelList);
         bookingListView.setAdapter(bookingListAdapter);
 
+
         // Initialize Firebase components
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
-        if (rating_Bar != null) {
-            rating_Bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                    // Get the booking ID from the intent
-                    String bookingId = getIntent().getStringExtra("booking_id");
-
-                    // Create a map to update the rating field in Firestore
-                    Map<String, Object> updateData = new HashMap<>();
-                    updateData.put("rating", rating);
-
-                    db.collection("bookings")
-                            .document(bookingId)
-                            .update(updateData)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    // Rating updated successfully
-                                    Toast.makeText(BookingDetails.this, "Rating updated", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Failed to update rating
-                                    Toast.makeText(BookingDetails.this, "Failed to update rating", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                }
-            });
-        }else{
-            Toast.makeText(BookingDetails.this,"Not Found",Toast.LENGTH_SHORT).show();
-        }
 
         // Get the currently logged-in user
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -126,5 +95,15 @@ public class BookingDetails extends AppCompatActivity {
                 finish(); // Simply finish this activity to return to the previous one
             }
         });
+
+//        txtRateUs.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                RatingDialog ratingDialog = new RatingDialog(BookingDetails.this);
+//                ratingDialog.show();
+//            }
+//        });
+
+
     }
 }

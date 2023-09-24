@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="Check Out Date"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/textViewRoomCount"
@@ -59,16 +59,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="Room Count"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
-    <RatingBar
-        android:id="@+id/rating_Bar"
+    <TextView
+        android:id="@+id/txtRateUs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="0.5"
-        android:rating="3"
-        android:layout_gravity="center"
-        android:progressTint="@color/yellow" />
+        android:text="Rate Now"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#E66A43"
+        android:layout_gravity="end"/>
 
 </LinearLayout>

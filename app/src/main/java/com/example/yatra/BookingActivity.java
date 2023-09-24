@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -116,8 +117,7 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String currentUserId = mAuth.getUid();
-//                String bookingId = getIntent().getStringExtra("booking_id");
-                String rating = "";
+                String bookingId = generateBookingId(currentUserId);
                 String hotelName = getIntent().getStringExtra("hotel_name");
                 String roomPrice = getIntent().getStringExtra("price");
                 String hotelLocation = getIntent().getStringExtra("location");
@@ -140,7 +140,7 @@ public class BookingActivity extends AppCompatActivity {
                 int totalPrice = totalRoomPrice * roomCount;
 
 
-                storeBookingDataToFirestore(currentUserId, rating, hotelName, roomPrice, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice);
+                storeBookingDataToFirestore(currentUserId, bookingId, hotelName, roomPrice, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice);
             }
         });
     }
@@ -173,7 +173,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     //sending booking details to the firebase
-    private void storeBookingDataToFirestore(String currentUserId, String rating, String hotelName, String roomPrice, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice) {
+    private void storeBookingDataToFirestore(String currentUserId, String bookingId, String hotelName, String roomPrice, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice) {
         // Get the Firebase Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -181,8 +181,8 @@ public class BookingActivity extends AppCompatActivity {
         // Create a new document with a random ID and set the booking data
         Map<String, Object> bookingData = new HashMap<>();
         bookingData.put("UserId", currentUserId);
-//        bookingData.put("booking_id", bookingId);
-        bookingData.put("rating", rating);
+        bookingData.put("booking_id", bookingId);
+//        bookingData.put("rating", rating);
         bookingData.put("hotel_name", hotelName);
         bookingData.put("room_price", roomPrice);
         bookingData.put("total_price", totalPrice);
@@ -203,12 +203,6 @@ public class BookingActivity extends AppCompatActivity {
                         Toast.makeText(BookingActivity.this, "Booking Successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(BookingActivity.this, DashboardActivity.class));
 
-                        //startBookingDetailsActivity with the booking_id as an extra
-                        String bookingId = documentReference.getId();
-                        Intent intent = new Intent(BookingActivity.this, BookingDetails.class);
-                        intent.putExtra("booking_id", bookingId);
-                        startActivity(intent);
-                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -219,4 +213,13 @@ public class BookingActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public static String generateBookingId(String userId) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.US);
+        String timestamp = dateFormat.format(new Date());
+
+        // Concatenate the timestamp and user ID to create a unique booking ID
+        return timestamp + userId;
+    }
+
 }

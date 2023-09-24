@@ -2,15 +2,21 @@ package com.example.yatra.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.yatra.BookingDetails;
 import com.example.yatra.Model.BookingModel;
 import com.example.yatra.R;
+import com.example.yatra.RatingDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -26,7 +32,7 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
         super(context, R.layout.booking_list_item, bookingModelList);
         this.context = context;
         this.bookingModelList = bookingModelList;
-        this.firestore = FirebaseFirestore.getInstance();
+//        this.firestore = FirebaseFirestore.getInstance();
     }
 
     @SuppressLint("SetTextI18n")
@@ -35,6 +41,23 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.booking_list_item, parent, false);
         }
+
+        TextView txtRateUs = convertView.findViewById(R.id.txtRateUs);
+        // Get the booking ID for this specific item
+        String bookingsId = bookingModelList.get(position).getBooking_id();
+
+
+        txtRateUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new RatingDialog with the correct bookingId
+
+                RatingDialog ratingDialog = new RatingDialog(context, bookingsId);
+                ratingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(android.R.color.transparent)));
+                ratingDialog.setCancelable(false);
+                ratingDialog.show();
+            }
+        });
 
         BookingModel bookingModel = bookingModelList.get(position);
 

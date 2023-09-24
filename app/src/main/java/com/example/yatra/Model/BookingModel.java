@@ -14,13 +14,13 @@ public class BookingModel {
     private String room_price;
     private String location;
 
-    private String rating;
+    private Double rating;
 
     public BookingModel() {
         // Required empty public constructor
     }
 
-    public BookingModel(String room_type, String UserId, String booking_id, int total_price, String room_price, String location, int room_count, String hotel_name, String check_in_date, String check_out_date, String rating) {
+    public BookingModel(String room_type, String UserId, String booking_id, int total_price, String room_price, String location, int room_count, String hotel_name, String check_in_date, String check_out_date, Double rating) {
         this.room_type = room_type;
         this.UserId = UserId;
         this.booking_id = booking_id;
@@ -43,11 +43,11 @@ public class BookingModel {
         this.booking_id = booking_id;
     }
 
-    public String getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
     public String getLocation() {
