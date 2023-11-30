@@ -19,6 +19,16 @@
             app:riv_corner_radius="15dp"
             android:scaleType="centerCrop"
             android:src="@drawable/hyatt_guest"/>
+        <TextView
+            android:id="@+id/userRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:drawableLeft="@drawable/baseline_star_24"
+            android:fontFamily="sans-serif-medium"
+            android:ellipsize="end"/>
 
         <TextView
             android:id="@+id/hotel_name"
@@ -41,33 +51,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-medium"
-            android:ellipsize="end"/>
-        <TextView
-            android:id="@+id/discount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Discount"
-            android:layout_marginLeft="20dp"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-medium"
-            android:ellipsize="end"/>
-    </LinearLayout>
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rating"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-medium"
-            android:ellipsize="end"/>
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

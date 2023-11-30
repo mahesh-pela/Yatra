@@ -2,9 +2,35 @@ package com.example.yatra.Model;
 
 
 public class BookingModel {
+    private String img_url;
+    private String description;
+
+//    private String discount;
+
     private String room_type;
     private int room_count;
     private String UserId;
+    private boolean rated; // Indicates whether the hotel has been rated
+
+    // ... (existing code)
+
+    public boolean hasRated() {
+        return rated;
+    }
+
+    public void setRated(boolean rated) {
+        this.rated = rated;
+    }
+
+//    public String getHotel_id() {
+//        return hotel_id;
+//    }
+//
+//    public void setHotel_id(String hotel_id) {
+//        this.hotel_id = hotel_id;
+//    }
+
+//    private String hotel_id;
 
     private String booking_id;
     private String hotel_name;
@@ -20,8 +46,11 @@ public class BookingModel {
         // Required empty public constructor
     }
 
-    public BookingModel(String room_type, String UserId, String booking_id, int total_price, String room_price, String location, int room_count, String hotel_name, String check_in_date, String check_out_date, Double rating) {
+    public BookingModel(String room_type, String description, String img_url, String UserId, String booking_id, int total_price, String room_price, String location, int room_count, String hotel_name, String check_in_date, String check_out_date, Double rating) {
         this.room_type = room_type;
+        this.description = description;
+//        this.discount = discount;
+        this.img_url = img_url;
         this.UserId = UserId;
         this.booking_id = booking_id;
         this.room_count = room_count;
@@ -32,6 +61,7 @@ public class BookingModel {
         this.total_price = total_price;
         this.location = location;
         this.rating = rating;
+//        this.hotel_id = hotel_id;
     }
 
 
@@ -49,6 +79,22 @@ public class BookingModel {
 
     public void setRating(Double rating) {
         this.rating = rating;
+    }
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     public String getLocation() {
         return location;

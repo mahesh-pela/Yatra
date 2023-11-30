@@ -24,8 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword;
     private TextView txtSignup, txtForgetPassword;
     private AppCompatButton btnLogin;
-
-//    private boolean isSignUp= false;
     private FirebaseAuth mAuth;
     ProgressDialog progressDialog;
     @Override
@@ -33,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         findViews();
-
     }
 
     private void findViews(){
@@ -41,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword =findViewById(R.id.edtPassword);
         txtSignup =findViewById(R.id.txtSignup);
         btnLogin =findViewById(R.id.btnLogin);
-
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -91,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent= new Intent(LoginActivity.this,DashboardActivity.class);
             startActivity(intent);
         }
-
 
         txtSignup.setOnClickListener(new View.OnClickListener() {
             @Override

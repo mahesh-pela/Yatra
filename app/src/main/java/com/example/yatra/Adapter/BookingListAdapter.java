@@ -46,20 +46,32 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
         // Get the booking ID for this specific item
         String bookingsId = bookingModelList.get(position).getBooking_id();
 
-
-        txtRateUs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new RatingDialog with the correct bookingId
-
-                RatingDialog ratingDialog = new RatingDialog(context, bookingsId);
-                ratingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(android.R.color.transparent)));
-                ratingDialog.setCancelable(false);
-                ratingDialog.show();
-            }
-        });
-
         BookingModel bookingModel = bookingModelList.get(position);
+
+        // Check if the hotel has been rated
+        if (bookingModel.hasRated()) {
+            txtRateUs.setEnabled(false);
+            txtRateUs.setText("Rated");
+        } else {
+            txtRateUs.setEnabled(true);
+            txtRateUs.setText("Rate Us");
+            txtRateUs.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Create a new RatingDialog with the correct bookingId
+                    RatingDialog ratingDialog = new RatingDialog(context, bookingsId);
+                    ratingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(android.R.color.transparent)));
+                    ratingDialog.setCancelable(false);
+                    ratingDialog.show();
+
+                    // Update the rated status after the user rates the hotel
+                    bookingModel.setRated(true);
+                    notifyDataSetChanged(); // Notify the adapter to refresh the view
+
+                }
+            });
+        }
+
 
         TextView textViewRoomType = convertView.findViewById(R.id.textViewRoomType);
         TextView textViewHotelLocation = convertView.findViewById(R.id.textViewHotelLocation);

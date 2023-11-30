@@ -40,7 +40,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
         Glide.with(context).load(popularModelList.get(position).getImg_url()).into(holder.pop_img);
         holder.hotel_name.setText(popularModelList.get(position).getName());
         holder.price.setText(popularModelList.get(position).getPrice());
-        holder.discount.setText(popularModelList.get(position).getDiscount());
+//        holder.discount.setText(popularModelList.get(position).getDiscount());
         holder.pop_description.setText(popularModelList.get(position).getDescription());
 
     }
@@ -63,7 +63,6 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             pop_img = itemView.findViewById(R.id.pop_img);
             hotel_name = itemView.findViewById(R.id.hotel_name);
             price =itemView.findViewById(R.id.price);

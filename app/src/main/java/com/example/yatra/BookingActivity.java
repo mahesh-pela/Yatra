@@ -118,8 +118,12 @@ public class BookingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String currentUserId = mAuth.getUid();
                 String bookingId = generateBookingId(currentUserId);
+//                String hotelId = getIntent().getStringExtra("hotel_id");
                 String hotelName = getIntent().getStringExtra("hotel_name");
                 String roomPrice = getIntent().getStringExtra("price");
+                String description = getIntent().getStringExtra("description");
+//                String discount = getIntent().getStringExtra("discount");
+                String img_url = getIntent().getStringExtra("img_url");
                 String hotelLocation = getIntent().getStringExtra("location");
                 String checkInDate = checkInDateEditText.getText().toString();
                 String roomType = room_type_spinner.getSelectedItem().toString();
@@ -140,7 +144,7 @@ public class BookingActivity extends AppCompatActivity {
                 int totalPrice = totalRoomPrice * roomCount;
 
 
-                storeBookingDataToFirestore(currentUserId, bookingId, hotelName, roomPrice, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice);
+                storeBookingDataToFirestore(currentUserId, bookingId, hotelName, roomPrice, description, img_url, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice);
             }
         });
     }
@@ -173,7 +177,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     //sending booking details to the firebase
-    private void storeBookingDataToFirestore(String currentUserId, String bookingId, String hotelName, String roomPrice, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice) {
+    private void storeBookingDataToFirestore(String currentUserId, String bookingId, String hotelName, String roomPrice, String description, String img_url, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice) {
         // Get the Firebase Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -182,8 +186,11 @@ public class BookingActivity extends AppCompatActivity {
         Map<String, Object> bookingData = new HashMap<>();
         bookingData.put("UserId", currentUserId);
         bookingData.put("booking_id", bookingId);
-//        bookingData.put("rating", rating);
+//        bookingData.put("hotel_id", hotelId);
         bookingData.put("hotel_name", hotelName);
+        bookingData.put("description", description);
+//        bookingData.put("discount", discount);
+        bookingData.put("img_url", img_url);
         bookingData.put("room_price", roomPrice);
         bookingData.put("total_price", totalPrice);
         bookingData.put("location", hotelLocation);

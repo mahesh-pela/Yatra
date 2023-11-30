@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Yatra"
         tools:targetApi="31">
         <activity
+            android:name=".RecommendedActivity"
+            android:exported="false" />
+        <activity
             android:name=".RatingDialog"
             android:exported="false" />
         <activity
@@ -34,9 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".DashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".SignupActivity"

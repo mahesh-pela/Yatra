@@ -53,7 +53,7 @@
         android:text="Top Destinations"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:textColor="@color/black"/>
     <TextView
@@ -83,10 +83,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Popular Hotels"
+            android:text="Recommended for you"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"/>
         <TextView
@@ -104,7 +104,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pop_hotels"
+        android:id="@+id/recommended_hotels"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"/>
@@ -113,8 +113,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -198,7 +197,7 @@
             android:layout_marginLeft="30dp"
             tools:ignore="UseCompoundDrawables">
             <ImageView
-                android:id="@+id/imgProfile"
+                android:id="@+id/img_Profile"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/profile_icon"/>

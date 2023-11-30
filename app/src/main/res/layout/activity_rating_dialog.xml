@@ -101,12 +101,6 @@
                     android:paddingEnd="10dp"/>
 
             </LinearLayout>
-            <TextView
-                android:id="@+id/txtRatingData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="rating"
-                android:textSize="15sp"/>
                 
 
         </LinearLayout>

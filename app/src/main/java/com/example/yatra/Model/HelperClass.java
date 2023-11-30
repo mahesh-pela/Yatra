@@ -1,7 +1,11 @@
 package com.example.yatra.Model;
 
 public class HelperClass {
-    String fullname, email, password, conpassword;
+    String fullname;
+    String email;
+    String password;
+    String conpassword;
+
 
     public String getFullname() {
         return fullname;
@@ -34,6 +38,7 @@ public class HelperClass {
     public void setConpassword(String conpassword) {
         this.conpassword = conpassword;
     }
+
     public HelperClass(String fullname, String email, String password, String conpassword) {
         this.fullname = fullname;
         this.email = email;
@@ -44,4 +49,6 @@ public class HelperClass {
     public HelperClass(){
 
     }
+
+
 }

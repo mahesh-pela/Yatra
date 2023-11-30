@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         txtName = findViewById(R.id.txtName);
         txtEmail = findViewById(R.id.txtEmail);
         btnLogout = findViewById(R.id.btnLogout);
-        backArrow = findViewById(R.id.backArrow);
+        backArrow = findViewById(R.id.back_Arrow);
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
