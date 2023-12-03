@@ -22,6 +22,8 @@ public class ProductModel {
     private double averageRating;
     private int ratingCount; // new field for the count of ratings
 
+    private int bookingCount;
+
     // ... existing methods ...
 
 
@@ -31,7 +33,7 @@ public class ProductModel {
 
     public ProductModel(String hotel_name, String check_out_date, int total_price, int room_count,
                         String booking_id, String UserId, String check_in_date,
-                        String room_type,Double rating, String location, String description, String room_price, String img_url) {
+                        String room_type,Double rating, int bookingCount, String location, String description, String room_price, String img_url) {
         this.hotel_name = hotel_name;
         this.rating = rating;
         this.check_out_date = check_out_date;
@@ -42,6 +44,7 @@ public class ProductModel {
         this.check_in_date = check_in_date;
         this.room_type = room_type;
         this.description = description;
+        this.bookingCount = bookingCount;
 //        this.discount = discount;
         this.room_price = room_price;
         this.img_url = img_url;
@@ -54,6 +57,13 @@ public class ProductModel {
 
     public void setRatingCount(int ratingCount) {
         this.ratingCount = ratingCount;
+    }
+    public int getBookingCount() {
+        return bookingCount;
+    }
+
+    public void setBookingCount(int bookingCount) {
+        this.bookingCount = bookingCount;
     }
     public String getHotel_name() {
         return hotel_name;
@@ -178,6 +188,7 @@ public class ProductModel {
                 this.hotel_name = product.getHotel_name();
                 this.rating = product.getRating();
                 this.averageRating = product.getAverageRating();
+                this.bookingCount = product.getBookingCount();
                 // Set other fields as needed
                 break;
             }
