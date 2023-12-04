@@ -52,6 +52,7 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
         if (bookingModel.hasRated()) {
             txtRateUs.setEnabled(false);
             txtRateUs.setText("Rated");
+            txtRateUs.setOnClickListener(null); // Disable click listener
         } else {
             txtRateUs.setEnabled(true);
             txtRateUs.setText("Rate Us");
@@ -67,13 +68,15 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
                     // Update the rated status after the user rates the hotel
                     bookingModel.setRated(true);
                     notifyDataSetChanged(); // Notify the adapter to refresh the view
-
                 }
             });
         }
 
+        // Rest of your code...
 
-        TextView textViewRoomType = convertView.findViewById(R.id.textViewRoomType);
+
+
+    TextView textViewRoomType = convertView.findViewById(R.id.textViewRoomType);
         TextView textViewHotelLocation = convertView.findViewById(R.id.textViewHotelLocation);
 //        TextView textViewHotelPrice = convertView.findViewById(R.id.textViewHotelPrice);
         TextView textViewTotalPrice = convertView.findViewById(R.id.textViewTotalPrice);

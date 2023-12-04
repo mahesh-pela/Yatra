@@ -28,6 +28,14 @@
                 android:src="@drawable/kalinchowk"/>
 
             <TextView
+                android:id="@+id/popRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rating"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="15sp"/>
+
+            <TextView
                 android:id="@+id/hotel_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,14 +66,6 @@
                 android:fontFamily="sans-serif-medium"
                 android:ellipsize="end"/>
         </LinearLayout>
-
-            <TextView
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rating"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/pop_description"

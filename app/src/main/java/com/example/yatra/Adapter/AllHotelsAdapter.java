@@ -3,6 +3,7 @@ package com.example.yatra.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,8 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context).load(popularModelList.get(position).getImg_url()).into(holder.pop_img);
+        holder.rating.setText(String.valueOf(popularModelList.get(position).getRating()));
+//        Log.d("allRating", "onBindViewHolder: "+ popularModelList.get(position).getRating());
         holder.hotel_name.setText(popularModelList.get(position).getName());
         holder.location.setText(popularModelList.get(position).getLocation());
         holder.price.setText(popularModelList.get(position).getPrice());
@@ -50,10 +53,13 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
         holder.pop_description.setText(popularModelList.get(position).getDescription());
     }
 
+    public int getItemCount() {
+        return popularModelList.size();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView pop_img;
-        TextView hotel_name, price, discount, pop_description, location;
+        TextView hotel_name, price, discount, pop_description, location, rating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,15 +69,13 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
             location = itemView.findViewById(R.id.location);
             price =itemView.findViewById(R.id.price);
             discount =itemView.findViewById(R.id.discount);
+            rating = itemView.findViewById(R.id.popRating);
             pop_description =itemView.findViewById(R.id.pop_description);
 
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return popularModelList.size();
-    }
+
 
 
 

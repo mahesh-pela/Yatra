@@ -1,5 +1,7 @@
 package com.example.yatra.Model;
 
+import android.util.Log;
+
 public class PopularModel {
 
     public String getHotel_id() {
@@ -16,17 +18,21 @@ public class PopularModel {
     String description;
 //    String discount;
     String price;
+
+    Double rating;
     String img_url;
 
     public PopularModel() {
     }
 
-    public PopularModel(String name, String location, String description,String price, String img_url, String hotel_id) {
+
+    public PopularModel(String name, String location, String description,String price, String img_url,Double rating, String hotel_id) {
         this.name = name;
         this.description = description;
 //        this.discount = discount;
         this.price = price;
         this.img_url = img_url;
+        this.rating = rating;
         this.location = location;
         this.hotel_id = hotel_id;
     }
@@ -37,6 +43,14 @@ public class PopularModel {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
     public String getName() {
         return name;
@@ -69,7 +83,6 @@ public class PopularModel {
     public void setImg_url(String img_url) {
         this.img_url = img_url;
     }
-
 
 
 }

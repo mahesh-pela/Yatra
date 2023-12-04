@@ -88,6 +88,8 @@ public class DashboardActivity extends AppCompatActivity {
         topDestAdapter = new TopDestAdapter(getApplicationContext(), topDestinationModelList);
         topDestRec.setAdapter(topDestAdapter);
 
+
+
         productModelList = new ArrayList<>();
         recommendedHotelsAdapter = new RecommendedHotelsAdapter(getApplicationContext(), productModelList);
         recommendedHotelsRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
@@ -97,19 +99,19 @@ public class DashboardActivity extends AppCompatActivity {
 
         // adding item touch in recyclerview
 //        SearchView implementation starts here
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                filterListHotel(newText);
-//                filterListDestination(newText);
-//                return true;
-//            }
-//        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterListHotel(newText);
+                filterListDestination(newText);
+                return true;
+            }
+        });
 
         //SearchView Section ends here
 
@@ -134,24 +136,28 @@ public class DashboardActivity extends AppCompatActivity {
                     }
                 });
 
-        //retrieves data from FireStore database from 'PopularHotels' collection
-        db.collection("bookings")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                ProductModel productModel = document.toObject(ProductModel.class);
-                                productModelList.add(productModel);
-                                recommendedHotelsAdapter.notifyDataSetChanged();
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Error" + task.getException(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
+
+
+
+//
+//        db.collection("bookings")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @SuppressLint("NotifyDataSetChanged")
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                ProductModel productModel = document.toObject(ProductModel.class);
+//                                productModelList.add(productModel);
+//                                recommendedHotelsAdapter.notifyDataSetChanged();
+//                            }
+//                        } else {
+//                            Toast.makeText(getApplicationContext(), "Error" + task.getException(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
 
 
         imgProfile.setOnClickListener(new View.OnClickListener() {
@@ -210,7 +216,8 @@ public class DashboardActivity extends AppCompatActivity {
                 finish();
             }
         });
-        // Retrieves data from FireStore database from 'bookings' collection
+
+        //code for recommendation that retrieves the data from the firebase
         db.collection("bookings")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -241,32 +248,32 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
-//    private void filterListHotel(String newText) {
-//        List<PopularModel> filteredListHotel = new ArrayList<>();
-//        for(PopularModel HotelItem: popularModelList){
-//            if(HotelItem.getName().toLowerCase().contains(newText.toLowerCase())){
-//                filteredListHotel.add(HotelItem);
-//            }
-//        }
-//        if(filteredListHotel.isEmpty()){
-//        }else{
-//            popularAdapter.setFilteredList(filteredListHotel);
-//        }
-//    }
-//
-//    private void filterListDestination(String newText) {
-//        List<TopDestinationModel> filteredListDestination = new ArrayList<>();
-//        for(TopDestinationModel DestItem: topDestinationModelList){
-//            if(DestItem.getName().toLowerCase().contains(newText.toLowerCase())){
-//                filteredListDestination.add(DestItem);
-//            }
-//        }
-//        if(filteredListDestination.isEmpty()){
-//            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-//        }else{
-//            topDestAdapter.setFilteredList(filteredListDestination);
-//        }
-//    }
+    private void filterListHotel(String newText) {
+        List<ProductModel> filteredListHotel = new ArrayList<>();
+        for(ProductModel HotelItem: productModelList){
+            if(HotelItem.getHotel_name().toLowerCase().contains(newText.toLowerCase())){
+                filteredListHotel.add(HotelItem);
+            }
+        }
+        if(filteredListHotel.isEmpty()){
+        }else{
+            recommendedHotelsAdapter.setFilteredList(filteredListHotel);
+        }
+    }
+
+    private void filterListDestination(String newText) {
+        List<TopDestinationModel> filteredListDestination = new ArrayList<>();
+        for(TopDestinationModel DestItem: topDestinationModelList){
+            if(DestItem.getName().toLowerCase().contains(newText.toLowerCase())){
+                filteredListDestination.add(DestItem);
+            }
+        }
+        if(filteredListDestination.isEmpty()){
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        }else{
+            topDestAdapter.setFilteredList(filteredListDestination);
+        }
+    }
 
     // recommendation code
     // recommendation code
@@ -306,10 +313,13 @@ public class DashboardActivity extends AppCompatActivity {
             if (validRatingsCount > 0) {
                 double averageRating = totalRating / validRatingsCount;
 
+                //round off the rating value to the nearest half
+                double roundedRating = (Math.round(averageRating * 2)/2.0);
+
                 // Create a new ProductModel with the calculated average rating
                 ProductModel uniqueHotel = new ProductModel();
                 uniqueHotel.setHotel_name(hotelName);
-                uniqueHotel.setRating(averageRating);
+                uniqueHotel.setRating((double) roundedRating);
                 uniqueHotel.setLocation(hotelList.get(0).getLocation()); // Assuming location is the same for all entries of the same hotel
                 uniqueHotel.setRoom_price(hotelList.get(0).getRoom_price()); // Assuming price is the same for all entries of the same hotel
                 uniqueHotel.setImg_url(hotelList.get(0).getImg_url());

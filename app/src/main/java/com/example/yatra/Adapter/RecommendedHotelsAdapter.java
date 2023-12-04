@@ -54,6 +54,12 @@ public class RecommendedHotelsAdapter extends RecyclerView.Adapter<RecommendedHo
     public void setProductList(List<ProductModel> productModelList) {
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void setFilteredList(List<ProductModel> filteredList){
+        this.productModelList = filteredList;
+        notifyDataSetChanged();
+    }
+
 
     //this method is called when the search query changes
 //    @SuppressLint("NotifyDataSetChanged")

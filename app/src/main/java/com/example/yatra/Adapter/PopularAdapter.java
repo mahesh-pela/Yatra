@@ -52,10 +52,10 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
 
     //this method is called when the search query changes
     @SuppressLint("NotifyDataSetChanged")
-    public void setFilteredList(List<PopularModel> filteredList){
-        this.popularModelList = filteredList;
-        notifyDataSetChanged();
-    }
+//    public void setFilteredList(List<PopularModel> filteredList){
+//        this.popularModelList = filteredList;
+//        notifyDataSetChanged();
+//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView pop_img;
