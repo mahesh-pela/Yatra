@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,8 +18,6 @@ import com.example.yatra.Adapter.AllHotelsAdapter;
 import com.example.yatra.Adapter.PopularAdapter;
 import com.example.yatra.Adapter.RecommendedHotelsAdapter;
 import com.example.yatra.Adapter.TopDestAdapter;
-import com.example.yatra.Model.BookingModel;
-import com.example.yatra.Model.HelperClass;
 import com.example.yatra.Model.PopularModel;
 import com.example.yatra.Model.ProductModel;
 import com.example.yatra.Model.TopDestinationModel;
@@ -29,17 +26,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
-import com.google.rpc.Help;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -88,6 +80,24 @@ public class DashboardActivity extends AppCompatActivity {
         topDestAdapter = new TopDestAdapter(getApplicationContext(), topDestinationModelList);
         topDestRec.setAdapter(topDestAdapter);
 
+        //implementing the clicklistener on destination
+        topDestAdapter = new TopDestAdapter(getApplicationContext(), topDestinationModelList);
+        topDestRec.setAdapter(topDestAdapter);
+
+        topDestAdapter.setOnItemClickListener(new TopDestAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(TopDestinationModel destinationModel) {
+                // Handle item click here, start DestinationDetailsActivity
+                Intent intent = new Intent(DashboardActivity.this, DestinationDetailsActivity.class);
+                intent.putExtra("destination_image", destinationModel.getImg_url());
+                intent.putExtra("destination_name", destinationModel.getName());
+                intent.putExtra("destination_description", destinationModel.getDescription());
+                // Add more data if needed
+                startActivity(intent);
+            }
+        });
+
+// clicklistener ends here
 
 
         productModelList = new ArrayList<>();
@@ -135,9 +145,6 @@ public class DashboardActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
 
 
 //
@@ -339,6 +346,3 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 }
-
-
-

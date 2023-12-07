@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Yatra"
         tools:targetApi="31">
         <activity
+            android:name=".DestinationDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecommendedActivity"
             android:exported="false" />
         <activity
