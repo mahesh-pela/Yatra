@@ -81,5 +81,8 @@ public class RecommendedHotelsAdapter extends RecyclerView.Adapter<RecommendedHo
             discount =itemView.findViewById(R.id.discount);
             userRating =itemView.findViewById(R.id.userRating);
             pop_description =itemView.findViewById(R.id.pop_description);
+
         }
-    }}
+    }
+
+}

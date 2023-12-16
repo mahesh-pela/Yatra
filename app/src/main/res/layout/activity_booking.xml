@@ -133,6 +133,13 @@
                 android:text="Book Room"
                 android:layout_marginTop="20dp" />
 
+            <Button
+                android:id="@+id/dashboardbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back to Dashboard"
+                android:layout_marginTop="20dp" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

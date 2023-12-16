@@ -33,7 +33,7 @@ import java.util.Map;
 public class BookingActivity extends AppCompatActivity {
     ImageView backArrow;
     EditText roomCount_edtText, checkInDateEditText, checkOutDateEditText ;
-    Button btnIncrement, btnDecrement, book_button;
+    Button btnIncrement, btnDecrement, book_button, dashboardbtn;
     int roomCount = 1;
 
     FirebaseAuth mAuth;
@@ -53,6 +53,7 @@ public class BookingActivity extends AppCompatActivity {
         roomCount_edtText = findViewById(R.id.roomCount_edtText);
         btnIncrement = findViewById(R.id.btnIncrement);
         btnDecrement = findViewById(R.id.btnDecrement);
+        dashboardbtn = findViewById(R.id.dashboardbtn);
 
         mAuth = FirebaseAuth.getInstance();
         checkInDateEditText = findViewById(R.id.check_in_date_edit_text);
@@ -85,6 +86,14 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(BookingActivity.this, HotelsActivity.class));
+            }
+        });
+
+        dashboardbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BookingActivity.this, DashboardActivity.class));
+                finish();
             }
         });
 

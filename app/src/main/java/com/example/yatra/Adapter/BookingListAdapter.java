@@ -49,12 +49,11 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
         BookingModel bookingModel = bookingModelList.get(position);
 
         // Check if the hotel has been rated
+        // Check if the hotel has been rated
         if (bookingModel.hasRated()) {
-            txtRateUs.setEnabled(false);
             txtRateUs.setText("Rated");
             txtRateUs.setOnClickListener(null); // Disable click listener
         } else {
-            txtRateUs.setEnabled(true);
             txtRateUs.setText("Rate Us");
             txtRateUs.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,6 +70,7 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
                 }
             });
         }
+
 
         // Rest of your code...
 

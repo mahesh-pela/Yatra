@@ -28,13 +28,16 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecommendedActivity extends AppCompatActivity {
     FirebaseFirestore db;
     // top destinations
     RecyclerView recommend_rec;
-    ImageView backArrow;
+    ImageView backArrowRecommended;
     List<ProductModel> productModelList;
     RecommendedAllAdapter recommendedAllAdapter;
 
@@ -46,7 +49,7 @@ public class RecommendedActivity extends AppCompatActivity {
         setContentView(R.layout.recommended_recyclerview);
 
         recommend_rec = findViewById(R.id.recommend_rec);
-        backArrow = findViewById(R.id.backArrow);
+        backArrowRecommended = findViewById(R.id.backArrowRecommended);
 
         // Initializing database
         db = FirebaseFirestore.getInstance();
@@ -63,16 +66,26 @@ public class RecommendedActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            List<ProductModel> allProducts = new ArrayList<>();
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ProductModel productModel = document.toObject(ProductModel.class);
-                                productModelList.add(productModel);
-                                recommendedAllAdapter.notifyDataSetChanged();
+                                allProducts.add(productModel);
                             }
+
+                            // Process the data to get unique hotels with average ratings
+                            List<ProductModel> uniqueHotelsList = processUniqueHotels(allProducts);
+
+                            // Set the processed data in the adapter
+                            productModelList.clear();
+                            productModelList.addAll(uniqueHotelsList);
+                            recommendedAllAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getApplicationContext(), "Error" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
 
         //recycler event
 
@@ -97,7 +110,7 @@ public class RecommendedActivity extends AppCompatActivity {
             }
         }));
 
-        backArrow.setOnClickListener(new View.OnClickListener() {
+        backArrowRecommended.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RecommendedActivity.this, DashboardActivity.class));
@@ -107,6 +120,65 @@ public class RecommendedActivity extends AppCompatActivity {
 
 
     }
+    private List<ProductModel> processUniqueHotels(List<ProductModel> inputList) {
+        Map<String, List<ProductModel>> hotelMap = new HashMap<>();
+
+        // Group the data by hotel name
+        for (ProductModel productModel : inputList) {
+            String hotelName = productModel.getHotel_name();
+            if (hotelMap.containsKey(hotelName)) {
+                hotelMap.get(hotelName).add(productModel);
+            } else {
+                List<ProductModel> newList = new ArrayList<>();
+                newList.add(productModel);
+                hotelMap.put(hotelName, newList);
+            }
+        }
+
+        // Calculate average rating for each hotel
+        List<ProductModel> resultList = new ArrayList<>();
+        for (Map.Entry<String, List<ProductModel>> entry : hotelMap.entrySet()) {
+            String hotelName = entry.getKey();
+            List<ProductModel> hotelList = entry.getValue();
+
+            // Calculate average rating
+            double totalRating = 0;
+            int validRatingsCount = 0; // Count of valid ratings (non-null)
+            for (ProductModel hotel : hotelList) {
+                Double rating = hotel.getRating();
+                if (rating != null) {
+                    totalRating += rating;
+                    validRatingsCount++;
+                }
+            }
+
+            // Avoid division by zero
+            if (validRatingsCount > 0) {
+                double averageRating = totalRating / validRatingsCount;
+
+                // Round off the rating value to the nearest half
+                double roundedRating = (Math.round(averageRating * 2) / 2.0);
+
+                // Create a new ProductModel with the calculated average rating
+                ProductModel uniqueHotel = new ProductModel();
+                uniqueHotel.setHotel_name(hotelName);
+                uniqueHotel.setRating((double) roundedRating);
+                uniqueHotel.setLocation(hotelList.get(0).getLocation()); // Assuming location is the same for all entries of the same hotel
+                uniqueHotel.setRoom_price(hotelList.get(0).getRoom_price()); // Assuming price is the same for all entries of the same hotel
+                uniqueHotel.setImg_url(hotelList.get(0).getImg_url());
+                uniqueHotel.setDescription((hotelList.get(0).getDescription()));
+
+                // Add the unique hotel to the result list
+                resultList.add(uniqueHotel);
+            }
+        }
+
+        // Sort the result list by average rating in descending order
+        Collections.sort(resultList, (hotel1, hotel2) -> Double.compare(hotel2.getRating(), hotel1.getRating()));
+
+        return resultList;
+    }
+
     private interface ClickListener {
         void onClick(View view, int position);
 

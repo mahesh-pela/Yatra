@@ -44,7 +44,7 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context).load(popularModelList.get(position).getImg_url()).into(holder.pop_img);
-        holder.rating.setText(String.valueOf(popularModelList.get(position).getRating()));
+//        holder.rating.setText(String.valueOf(popularModelList.get(position).getRating()));
 //        Log.d("allRating", "onBindViewHolder: "+ popularModelList.get(position).getRating());
         holder.hotel_name.setText(popularModelList.get(position).getName());
         holder.location.setText(popularModelList.get(position).getLocation());
@@ -69,7 +69,7 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.View
             location = itemView.findViewById(R.id.location);
             price =itemView.findViewById(R.id.price);
             discount =itemView.findViewById(R.id.discount);
-            rating = itemView.findViewById(R.id.popRating);
+//            rating = itemView.findViewById(R.id.popRating);
             pop_description =itemView.findViewById(R.id.pop_description);
 
         }

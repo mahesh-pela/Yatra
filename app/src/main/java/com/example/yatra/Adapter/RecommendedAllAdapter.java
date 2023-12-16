@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.yatra.Model.PopularModel;
 import com.example.yatra.Model.ProductModel;
 import com.example.yatra.R;
 
@@ -41,12 +40,14 @@ public class RecommendedAllAdapter extends RecyclerView.Adapter<RecommendedAllAd
         holder.hotel_name.setText(productModelList.get(position).getHotel_name());
         holder.location.setText(productModelList.get(position).getLocation());
         holder.price.setText(productModelList.get(position).getRoom_price());
-//        holder.discount.setText(productModelList.get(position).getDiscount());
         holder.pop_description.setText(productModelList.get(position).getDescription());
     }
 
+    public int getItemCount() {
+        return productModelList.size();
+    }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView pop_img;
         TextView hotel_name, price, discount, pop_description, location, userRating;
 
@@ -56,20 +57,14 @@ public class RecommendedAllAdapter extends RecyclerView.Adapter<RecommendedAllAd
             pop_img = itemView.findViewById(R.id.pop_img);
             hotel_name = itemView.findViewById(R.id.hotel_name);
             location = itemView.findViewById(R.id.location);
-            price =itemView.findViewById(R.id.price);
-            discount =itemView.findViewById(R.id.discount);
-            userRating =itemView.findViewById(R.id.userRating);
-            pop_description =itemView.findViewById(R.id.pop_description);
+            price = itemView.findViewById(R.id.price);
+//            discount = itemView.findViewById(R.id.discount);
+            userRating = itemView.findViewById(R.id.userRating);
+            pop_description = itemView.findViewById(R.id.pop_description);
+
 
         }
     }
-
-    @Override
-    public int getItemCount() {
-        return productModelList.size();
-    }
-
-
 
 
 }
