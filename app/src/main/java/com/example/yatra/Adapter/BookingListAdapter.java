@@ -84,6 +84,7 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
         TextView textViewCheckInDate = convertView.findViewById(R.id.textViewCheckInDate);
         TextView textViewCheckOutDate = convertView.findViewById(R.id.textViewCheckOutDate);
         TextView textViewRoomCount = convertView.findViewById(R.id.textViewRoomCount);
+        TextView textStatus = convertView.findViewById(R.id.textStatus);
 //        RatingBar ratingBar = convertView.findViewById(R.id.ratingBar);
 
         textViewRoomType.setText("Room Type: " + bookingModel.getRoom_type());
@@ -94,6 +95,7 @@ public class BookingListAdapter extends ArrayAdapter<BookingModel> {
         textViewCheckOutDate.setText("Check-out Date: " + bookingModel.getCheck_out_date());
         textViewRoomCount.setText("Room Count: " + bookingModel.getRoom_count());
         textViewHotelName.setText("Hotel Name: " + bookingModel.getHotel_name());
+        textStatus.setText("Status: " + bookingModel.getStatus());
 //        ratingBar.setRating(Float.parseFloat("Rating: " + bookingModel.getRating()));
 
         return convertView;

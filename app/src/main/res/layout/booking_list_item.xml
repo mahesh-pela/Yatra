@@ -62,6 +62,14 @@
         android:textSize="16sp"/>
 
     <TextView
+        android:id="@+id/textStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Status"
+        android:textSize="16sp"/>
+
+    <TextView
         android:id="@+id/txtRateUs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

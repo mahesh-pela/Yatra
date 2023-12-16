@@ -21,11 +21,21 @@ public class BookingModel {
 
     private Double rating;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
+
     public BookingModel() {
         // Required empty public constructor
     }
 
-    public BookingModel(String room_type, boolean rated,String description, String img_url, String UserId, String booking_id, int total_price, String room_price, String location, int room_count, String hotel_name, String check_in_date, String check_out_date, Double rating) {
+    public BookingModel(String room_type, boolean rated,String description, String img_url, String UserId, String booking_id, int total_price, String room_price, String location, int room_count, String hotel_name, String check_in_date, String check_out_date, Double rating, String status) {
         this.room_type = room_type;
         this.description = description;
         this.rated = rated;
@@ -41,6 +51,7 @@ public class BookingModel {
         this.total_price = total_price;
         this.location = location;
         this.rating = rating;
+        this.status =status;
 //        this.hotel_id = hotel_id;
     }
 

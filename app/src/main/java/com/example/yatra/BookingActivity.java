@@ -137,6 +137,7 @@ public class BookingActivity extends AppCompatActivity {
                 String checkInDate = checkInDateEditText.getText().toString();
                 String roomType = room_type_spinner.getSelectedItem().toString();
                 String checkOutDate = checkOutDateEditText.getText().toString();
+                String status = "pending";
 
                 // Check if any of the fields are empty
                 if (checkInDate.isEmpty() || checkOutDate.isEmpty()) {
@@ -153,7 +154,7 @@ public class BookingActivity extends AppCompatActivity {
                 int totalPrice = totalRoomPrice * roomCount;
 
 
-                storeBookingDataToFirestore(currentUserId, bookingId, hotelName, roomPrice, description, img_url, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice);
+                storeBookingDataToFirestore(currentUserId, bookingId, hotelName, roomPrice, description, img_url, hotelLocation, checkInDate, roomType, checkOutDate, roomCount, totalPrice, status);
             }
         });
     }
@@ -186,7 +187,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     //sending booking details to the firebase
-    private void storeBookingDataToFirestore(String currentUserId, String bookingId, String hotelName, String roomPrice, String description, String img_url, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice) {
+    private void storeBookingDataToFirestore(String currentUserId, String bookingId, String hotelName, String roomPrice, String description, String img_url, String hotelLocation, String checkInDate, String roomType, String checkOutDate, int roomCount, int totalPrice, String status) {
         // Get the Firebase Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -207,6 +208,7 @@ public class BookingActivity extends AppCompatActivity {
         bookingData.put("room_type", roomType);
         bookingData.put("check_out_date", checkOutDate);
         bookingData.put("room_count", roomCount);
+        bookingData.put("status", status);
 
         // Add the booking data to the "bookings" collection
         db.collection("bookings")

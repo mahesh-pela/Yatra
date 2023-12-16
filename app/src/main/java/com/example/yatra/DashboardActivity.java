@@ -114,14 +114,16 @@ public class DashboardActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                // Filter the list based on the complete input
+                filterListHotel(query);
+                filterListDestination(query);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterListHotel(newText);
-                filterListDestination(newText);
-                return true;
+                // No action needed when text is being changed
+                return false;
             }
         });
 
@@ -280,29 +282,34 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
-    private void filterListHotel(String newText) {
+    private void filterListHotel(String query) {
         List<ProductModel> filteredListHotel = new ArrayList<>();
-        for(ProductModel HotelItem: productModelList){
-            if(HotelItem.getHotel_name().toLowerCase().contains(newText.toLowerCase())){
-                filteredListHotel.add(HotelItem);
+        for (ProductModel hotelItem : productModelList) {
+            if (hotelItem.getHotel_name().toLowerCase().equals(query.toLowerCase())) {
+                filteredListHotel.add(hotelItem);
             }
         }
-        if(filteredListHotel.isEmpty()){
-        }else{
+
+        // Check if any results found
+        if (filteredListHotel.isEmpty()) {
+            Toast.makeText(this, "Hotel not found", Toast.LENGTH_SHORT).show();
+        } else {
             recommendedHotelsAdapter.setFilteredList(filteredListHotel);
         }
     }
 
-    private void filterListDestination(String newText) {
+    private void filterListDestination(String query) {
         List<TopDestinationModel> filteredListDestination = new ArrayList<>();
-        for(TopDestinationModel DestItem: topDestinationModelList){
-            if(DestItem.getName().toLowerCase().contains(newText.toLowerCase())){
-                filteredListDestination.add(DestItem);
+        for (TopDestinationModel destItem : topDestinationModelList) {
+            if (destItem.getName().toLowerCase().equals(query.toLowerCase())) {
+                filteredListDestination.add(destItem);
             }
         }
-        if(filteredListDestination.isEmpty()){
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-        }else{
+
+        // Check if any results found
+        if (filteredListDestination.isEmpty()) {
+            Toast.makeText(this, "Destination not found", Toast.LENGTH_SHORT).show();
+        } else {
             topDestAdapter.setFilteredList(filteredListDestination);
         }
     }
